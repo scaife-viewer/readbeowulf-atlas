@@ -42,7 +42,86 @@ Create a superuser:
 Run the `import_versions` script:
 
 ```
-python manage.py shell -c 'from readbeowulf_atlas.library.importers import import_versions; import_versions();'
+./manage.py shell -c 'from readbeowulf_atlas.library.importers import import_versions; import_versions();'
 ```
 
 ## Sample Queries
+
+Access the interactive GraphQL explorer at `http://localhost:8000/graphql/`.
+
+Retrieve all the fitts.
+```
+{
+  fitts {
+    edges {
+      node {
+        id
+        label
+        position
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+```
+
+Retrieve the first ten half-lines.
+```
+{
+  halflines(first: 10) {
+    edges {
+      node {
+        id
+        label
+        position
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+```
+
+
+Retrieve only the second part of the final ten half-lines.
+```
+{
+  halflines(last: 10, position: "b") {
+    edges {
+      node {
+        id
+        label
+        position
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+```
+
+Get the first token of every paragraph along with its gloss.
+```
+{
+  tokens(firstInParagraph: true) {
+    edges {
+      node {
+        id
+        textContent
+        gloss
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+```
