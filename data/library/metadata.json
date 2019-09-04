@@ -1,11 +1,11 @@
 {
   "versions": [
     {
-      "urn": "",
-      "content_path": "",
+      "urn": "urn:cts:angLit:anon.beowulf",
+      "content_path": "brunetti-length.txt",
       "metadata": {
-        "work_title": "",
-        "work_urn": "",
+        "work_title": "Beowulf",
+        "work_urn": "urn:cts:angLit:anon.beowulf",
         "type": "edition"
       }
     }

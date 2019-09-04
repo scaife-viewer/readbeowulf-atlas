@@ -4,7 +4,7 @@ from django.db import models
 
 class Version(models.Model):
     """
-    urn:cts:
+    urn:cts:angLit:anon.beowulf
     """
 
     urn = models.CharField(max_length=255)
@@ -12,7 +12,7 @@ class Version(models.Model):
     metadata = JSONField(encoder="", default=dict, blank=True)
     """
     {
-        "work_urn": "",
+        "work_urn": "urn:cts:angLit:anon.beowulf.perseus-ang1",
         "work_title": "Beowulf",
         "type": "version"
     }
@@ -27,7 +27,7 @@ class Version(models.Model):
 
 class Fitt(models.Model):
     """
-    urn:cts:
+    urn:cts:angLit:anon.beowulf.1
     """
 
     position = models.IntegerField()
@@ -50,7 +50,7 @@ class Fitt(models.Model):
 
 class Paragraph(models.Model):
     """
-    urn:cts:
+    urn:cts:angLit:anon.beowulf.1.1
     """
 
     position = models.IntegerField()
@@ -76,7 +76,7 @@ class Paragraph(models.Model):
 
 class Line(models.Model):
     """
-    urn:cts:
+    urn:cts:angLit:anon.beowulf.1.1.1
     """
 
     position = models.IntegerField()
@@ -105,7 +105,7 @@ class Line(models.Model):
 
 class HalfLine(models.Model):
     """
-    urn:cts:
+    urn:cts:angLit:anon.beowulf.1.1.1.a
     """
 
     position = models.CharField(max_length=1)
@@ -137,7 +137,7 @@ class HalfLine(models.Model):
 
 class Token(models.Model):
     """
-    urn:cts:
+    urn:cts:angLit:anon.beowulf.1.1.1.a.1
     """
 
     pre_punctuation = models.CharField(max_length=2, null=True, blank=True)

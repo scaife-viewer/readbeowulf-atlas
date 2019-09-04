@@ -4,8 +4,8 @@ ATLAS Server for Readbeowulf.
 
 ## Getting Started
 
-Make sure you are using a virtual environment of some sort (e.g. `virtualenv` or
-`pyenv`).
+Make sure you are using a virtual environment of some sort (e.g. `virtualenv`
+or `pyenv`).
 
 ```
 pip install -r requirements-dev.txt
