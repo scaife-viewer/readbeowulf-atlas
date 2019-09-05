@@ -9,131 +9,261 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Fitt',
+            name="Fitt",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.IntegerField()),
-                ('idx', models.IntegerField(help_text='0-based index')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.IntegerField()),
+                ("idx", models.IntegerField(help_text="0-based index")),
             ],
-            options={
-                'ordering': ['idx'],
-            },
+            options={"ordering": ["idx"]},
         ),
         migrations.CreateModel(
-            name='HalfLine',
+            name="HalfLine",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.CharField(max_length=1)),
-                ('idx', models.IntegerField(help_text='0-based index')),
-                ('fitt', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='halflines', to='library.Fitt')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.CharField(max_length=1)),
+                ("idx", models.IntegerField(help_text="0-based index")),
+                (
+                    "fitt",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="halflines",
+                        to="library.Fitt",
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['idx'],
-            },
+            options={"ordering": ["idx"]},
         ),
         migrations.CreateModel(
-            name='Line',
+            name="Line",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.IntegerField()),
-                ('idx', models.IntegerField(help_text='0-based index')),
-                ('fitt', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lines', to='library.Fitt')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.IntegerField()),
+                ("idx", models.IntegerField(help_text="0-based index")),
+                (
+                    "fitt",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="lines",
+                        to="library.Fitt",
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['idx'],
-            },
+            options={"ordering": ["idx"]},
         ),
         migrations.CreateModel(
-            name='Paragraph',
+            name="Paragraph",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('position', models.IntegerField()),
-                ('idx', models.IntegerField(help_text='0-based index')),
-                ('fitt', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='paragraphs', to='library.Fitt')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("position", models.IntegerField()),
+                ("idx", models.IntegerField(help_text="0-based index")),
+                (
+                    "fitt",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="paragraphs",
+                        to="library.Fitt",
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['idx'],
-            },
+            options={"ordering": ["idx"]},
         ),
         migrations.CreateModel(
-            name='Version',
+            name="Version",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('urn', models.CharField(max_length=255)),
-                ('name', models.CharField(blank=True, max_length=255, null=True)),
-                ('metadata', django.contrib.postgres.fields.jsonb.JSONField(blank=True, default=dict, encoder='')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("urn", models.CharField(max_length=255)),
+                ("name", models.CharField(blank=True, max_length=255, null=True)),
+                (
+                    "metadata",
+                    django.contrib.postgres.fields.jsonb.JSONField(
+                        blank=True, default=dict, encoder=""
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['urn'],
-            },
+            options={"ordering": ["urn"]},
         ),
         migrations.CreateModel(
-            name='Token',
+            name="Token",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pre_punctuation', models.CharField(blank=True, max_length=2, null=True)),
-                ('text_content', models.CharField(max_length=16)),
-                ('post_punctuation', models.CharField(blank=True, max_length=11, null=True)),
-                ('syntax', models.CharField(blank=True, max_length=3, null=True)),
-                ('parse', models.CharField(blank=True, max_length=6, null=True)),
-                ('lemma', models.CharField(max_length=17)),
-                ('part_of_speech', models.CharField(max_length=2)),
-                ('o', models.CharField(blank=True, max_length=2, null=True)),
-                ('gloss', models.CharField(max_length=44)),
-                ('with_length', models.CharField(max_length=66)),
-                ('first_in_paragraph', models.BooleanField()),
-                ('non_verse', models.BooleanField()),
-                ('caesura_boundary', models.BooleanField()),
-                ('position', models.IntegerField()),
-                ('idx', models.IntegerField(help_text='0-based index')),
-                ('fitt', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='library.Fitt')),
-                ('halfline', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='library.HalfLine')),
-                ('line', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='library.Line')),
-                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='library.Paragraph')),
-                ('version', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tokens', to='library.Version')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "pre_punctuation",
+                    models.CharField(blank=True, max_length=2, null=True),
+                ),
+                ("text_content", models.CharField(max_length=16)),
+                (
+                    "post_punctuation",
+                    models.CharField(blank=True, max_length=11, null=True),
+                ),
+                ("syntax", models.CharField(blank=True, max_length=3, null=True)),
+                ("parse", models.CharField(blank=True, max_length=6, null=True)),
+                ("lemma", models.CharField(max_length=17)),
+                ("part_of_speech", models.CharField(max_length=2)),
+                ("o", models.CharField(blank=True, max_length=2, null=True)),
+                ("gloss", models.CharField(max_length=44)),
+                ("with_length", models.CharField(max_length=66)),
+                ("first_in_paragraph", models.BooleanField()),
+                ("non_verse", models.BooleanField()),
+                ("caesura_boundary", models.BooleanField()),
+                ("position", models.IntegerField()),
+                ("idx", models.IntegerField(help_text="0-based index")),
+                (
+                    "fitt",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tokens",
+                        to="library.Fitt",
+                    ),
+                ),
+                (
+                    "halfline",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tokens",
+                        to="library.HalfLine",
+                    ),
+                ),
+                (
+                    "line",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tokens",
+                        to="library.Line",
+                    ),
+                ),
+                (
+                    "paragraph",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tokens",
+                        to="library.Paragraph",
+                    ),
+                ),
+                (
+                    "version",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tokens",
+                        to="library.Version",
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['idx'],
-            },
+            options={"ordering": ["idx"]},
         ),
         migrations.AddField(
-            model_name='paragraph',
-            name='version',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='paragraphs', to='library.Version'),
+            model_name="paragraph",
+            name="version",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="paragraphs",
+                to="library.Version",
+            ),
         ),
         migrations.AddField(
-            model_name='line',
-            name='paragraph',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lines', to='library.Paragraph'),
+            model_name="line",
+            name="paragraph",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="lines",
+                to="library.Paragraph",
+            ),
         ),
         migrations.AddField(
-            model_name='line',
-            name='version',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lines', to='library.Version'),
+            model_name="line",
+            name="version",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="lines",
+                to="library.Version",
+            ),
         ),
         migrations.AddField(
-            model_name='halfline',
-            name='line',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='halflines', to='library.Line'),
+            model_name="halfline",
+            name="line",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="halflines",
+                to="library.Line",
+            ),
         ),
         migrations.AddField(
-            model_name='halfline',
-            name='paragraph',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='halflines', to='library.Paragraph'),
+            model_name="halfline",
+            name="paragraph",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="halflines",
+                to="library.Paragraph",
+            ),
         ),
         migrations.AddField(
-            model_name='halfline',
-            name='version',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='halflines', to='library.Version'),
+            model_name="halfline",
+            name="version",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="halflines",
+                to="library.Version",
+            ),
         ),
         migrations.AddField(
-            model_name='fitt',
-            name='version',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='fitts', to='library.Version'),
+            model_name="fitt",
+            name="version",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="fitts",
+                to="library.Version",
+            ),
         ),
     ]

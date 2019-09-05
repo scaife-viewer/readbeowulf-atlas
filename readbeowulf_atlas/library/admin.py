@@ -10,26 +10,26 @@ class VersionAdmin(admin.ModelAdmin):
 
 @admin.register(Fitt)
 class Fitt(admin.ModelAdmin):
-    list_display = ("id", "position", "idx", "version",)
+    list_display = ("id", "position", "idx", "version")
     list_filter = ("version",)
 
 
 @admin.register(Paragraph)
 class ParagraphAdmin(admin.ModelAdmin):
-    list_display = ("id", "position", "idx", "fitt", "version",)
-    list_filter = ("fitt", "version",)
+    list_display = ("id", "position", "idx", "fitt", "version")
+    list_filter = ("fitt", "version")
 
 
 @admin.register(Line)
 class LineAdmin(admin.ModelAdmin):
-    list_display = ("id", "position", "idx", "paragraph", "fitt", "version",)
-    list_filter = ("paragraph", "fitt", "version",)
+    list_display = ("id", "position", "idx", "paragraph", "fitt", "version")
+    list_filter = ("paragraph", "fitt", "version")
 
 
 @admin.register(HalfLine)
 class HalfLineAdmin(admin.ModelAdmin):
-    list_display = ("id", "position", "idx", "line", "paragraph", "fitt", "version",)
-    list_filter = ("line", "paragraph", "fitt", "version",)
+    list_display = ("id", "position", "idx", "line", "paragraph", "fitt", "version")
+    list_filter = ("line", "paragraph", "fitt", "version")
 
 
 @admin.register(Token)
@@ -57,4 +57,4 @@ class TokenAdmin(admin.ModelAdmin):
         "fitt",
         "version",
     )
-    list_filter = ("halfline", "line", "paragraph", "fitt", "version",)
+    list_filter = ("halfline", "line", "paragraph", "fitt", "version")

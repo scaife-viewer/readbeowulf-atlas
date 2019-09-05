@@ -17,11 +17,9 @@ class AbstractFactory(abc.ABC):
 
     @abc.abstractmethod
     def get(self, **kwargs):
-        instance, _ = self.model.objects.get_or_create(**{
-            "idx": self.idx,
-            "position": self.position,
-            **kwargs
-        })
+        instance, _ = self.model.objects.get_or_create(
+            **{"idx": self.idx, "position": self.position, **kwargs}
+        )
         self.idx += 1
         self.position += 1
         return instance
@@ -52,11 +50,9 @@ class HalfLineFactory(AbstractFactory):
     model = HalfLine
 
     def get(self, position, **kwargs):
-        instance, _ = self.model.objects.get_or_create(**{
-            "idx": self.idx,
-            "position": position,
-            **kwargs
-        })
+        instance, _ = self.model.objects.get_or_create(
+            **{"idx": self.idx, "position": position, **kwargs}
+        )
         self.idx += 1
         return instance
 
@@ -88,11 +84,13 @@ def _destructure(token_data):
     caesura_boundary = token_kwargs["caesura_boundary"]
     first_in_paragraph = token_kwargs["first_in_paragraph"]
     non_verse = token_kwargs["non_verse"]
-    token_kwargs.update({
-        "caesura_boundary": True if caesura_boundary == "/" else False,
-        "first_in_paragraph": True if first_in_paragraph == "1" else False,
-        "non_verse": True if non_verse == "1" else False,
-    })
+    token_kwargs.update(
+        {
+            "caesura_boundary": True if caesura_boundary == "/" else False,
+            "first_in_paragraph": True if first_in_paragraph == "1" else False,
+            "non_verse": True if non_verse == "1" else False,
+        }
+    )
 
     fitt_ref = token_kwargs.pop("fitt_id")
     paragraph_ref = token_kwargs.pop("paragraph_id")
@@ -103,14 +101,12 @@ def _destructure(token_data):
 
 
 def _prepare_token_obj(
-    version_obj,
-    model_lookup,
-    factory_lookup,
-    token_data,
-    token_idx
+    version_obj, model_lookup, factory_lookup, token_data, token_idx
 ):
     joins = {"version": version_obj}
-    fitt_ref, paragraph_ref, line_ref, halfline_ref, token_kwargs = _destructure(token_data)
+    fitt_ref, paragraph_ref, line_ref, halfline_ref, token_kwargs = _destructure(
+        token_data
+    )
 
     fitt_obj = model_lookup["fitt"].get(fitt_ref)
     if fitt_obj is None:
@@ -143,10 +139,7 @@ def _prepare_token_obj(
 def _import_version(data):
     version_obj, _ = Version.objects.update_or_create(
         urn=data["urn"],
-        defaults=dict(
-            name=data["metadata"]["work_title"],
-            metadata=data["metadata"]
-        ),
+        defaults=dict(name=data["metadata"]["work_title"], metadata=data["metadata"]),
     )
     full_content_path = os.path.join(LIBRARY_DATA_PATH, data["content_path"])
 
@@ -156,9 +149,7 @@ def _import_version(data):
         "line": LineFactory(),
         "halfline": HalfLineFactory(),
     }
-    model_lookup = {
-        "fitt": {}, "paragraph": {}, "line": {}, "halfline": {},
-    }
+    model_lookup = {"fitt": {}, "paragraph": {}, "line": {}, "halfline": {}}
     tokens_to_create = []
 
     with open(full_content_path, "r") as f:

@@ -61,7 +61,7 @@ class LineNode(DjangoObjectType):
             "position",
             "paragraph__position",
             "fitt__position",
-            "version__urn"
+            "version__urn",
         ]
 
 
@@ -78,7 +78,7 @@ class HalfLineNode(DjangoObjectType):
             "line__position",
             "paragraph__position",
             "fitt__position",
-            "version__urn"
+            "version__urn",
         ]
 
 

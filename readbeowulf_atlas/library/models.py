@@ -178,7 +178,9 @@ class Token(models.Model):
 
     @property
     def label(self):
-        return f"{self.fitt}:{self.paragraph}:{self.line}:{self.halfline}:{self.position}"
+        return (
+            f"{self.fitt}:{self.paragraph}:{self.line}:{self.halfline}:{self.position}"
+        )
 
     def __str__(self):
         return f"{self.version} [token={self.position}]"
