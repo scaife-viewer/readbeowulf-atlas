@@ -149,7 +149,7 @@ def _import_version(data):
         "line": LineFactory(),
         "halfline": HalfLineFactory(),
     }
-    model_lookup = {"fitt": {}, "paragraph": {}, "line": {}, "halfline": {}}
+    model_lookup = {key: dict() for key in factory_lookup.keys()}
     tokens_to_create = []
 
     with open(full_content_path, "r") as f:
